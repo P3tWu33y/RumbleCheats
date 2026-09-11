@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\utilities">
+      <UniqueIdentifier>{73d6e1ce-cb60-4a19-9f0e-2c96b9c16ab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\memory">
+      <UniqueIdentifier>{ab565f33-d330-4054-a2bd-6a3346328d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\suspender">
+      <UniqueIdentifier>{2ceac87f-9a7c-4b58-8b6e-a127e086c9cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\bypass">
+      <UniqueIdentifier>{00fffb38-0067-41a5-9e7a-bb3815147cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="reflective">
+      <UniqueIdentifier>{4dc63fe6-6cb7-4690-a413-55322e8a637e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="suspender\suspender.cpp">
+      <Filter>Source Files\suspender</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\memory.cpp">
+      <Filter>Source Files\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\scanner.cpp">
+      <Filter>Source Files\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\utils.cpp">
+      <Filter>Source Files\utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="bypass\bypass.cpp">
+      <Filter>Source Files\bypass</Filter>
+    </ClCompile>
+    <ClCompile Include="reflective\ReflectiveLoader.c">
+      <Filter>reflective</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="suspender\suspender.h">
+      <Filter>Source Files\suspender</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\memory.h">
+      <Filter>Source Files\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\scanner.h">
+      <Filter>Source Files\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\utils.h">
+      <Filter>Source Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\includes.h">
+      <Filter>Source Files\utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="bypass\bypass.h">
+      <Filter>Source Files\bypass</Filter>
+    </ClInclude>
+    <ClInclude Include="reflective\ReflectiveDLLInjection.h">
+      <Filter>reflective</Filter>
+    </ClInclude>
+    <ClInclude Include="reflective\ReflectiveLoader.h">
+      <Filter>reflective</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrame.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Module.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

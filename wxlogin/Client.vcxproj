@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <!-- ========================================================= -->
+  <!-- Global settings                                           -->
+  <!-- ========================================================= -->
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <ProjectGuid>{0D6AD0E3-AC06-5085-16EB-E61C5E339CBA}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>client</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <!-- ========================================================= -->
+  <!-- Configuration settings                                    -->
+  <!-- ========================================================= -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <!-- ========================================================= -->
+  <!-- Extension settings                                        -->
+  <!-- ========================================================= -->
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <!-- ========================================================= -->
+  <!-- Property sheets                                           -->
+  <!-- ========================================================= -->
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <!-- ========================================================= -->
+  <!-- vcpkg                                                     -->
+  <!-- ========================================================= -->
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+  </PropertyGroup>
+  <!-- Win32 = x86 -->
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <VcpkgTriplet>x86-windows-static</VcpkgTriplet>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <VcpkgTriplet>x86-windows-static</VcpkgTriplet>
+  </PropertyGroup>
+  <!-- x64 = x64 -->
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgTriplet>x64-windows-static</VcpkgTriplet>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgTriplet>x64-windows-static</VcpkgTriplet>
+  </PropertyGroup>
+  <!-- ========================================================= -->
+  <!-- Debug Win32                                              -->
+  <!-- ========================================================= -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\Client\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;WIN_X86;
+        _DEBUG;
+        _WINDOWS;
+        %(PreprocessorDefinitions)
+      </PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\antidebug;
+        $(ProjectDir)vcpkg_installed\x86-windows-static\include;
+        $(ProjectDir)src;
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(ProjectDir)lib\SecureEngineSDK64.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <!-- ========================================================= -->
+  <!-- Release Win32                                            -->
+  <!-- ========================================================= -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\Client\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;WIN_X86;
+        NDEBUG;
+        _WINDOWS;
+        %(PreprocessorDefinitions)
+      </PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\updater;$(ProjectDir)src\injector;$(ProjectDir)src\firebase;$(ProjectDir)src\antidebug;$(ProjectDir)src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(ProjectDir)lib\SecureEngineSDK64.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <!-- ========================================================= -->
+  <!-- Debug x64                                                -->
+  <!-- ========================================================= -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\Client\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+    <ClCompile>
+      <PreprocessorDefinitions>
+        _DEBUG;
+        _WINDOWS;
+        %(PreprocessorDefinitions)
+      ;WIN_X64</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\antidebug;
+        $(ProjectDir)vcpkg_installed\x64-windows-static\include;
+        $(ProjectDir)src;
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(ProjectDir)lib\SecureEngineSDK64.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <!-- ========================================================= -->
+  <!-- Release x64                                              -->
+  <!-- ========================================================= -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\Client\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+    <ClCompile>
+      <PreprocessorDefinitions>
+        NDEBUG;
+        _WINDOWS;
+        %(PreprocessorDefinitions)
+      ;WIN_X64</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\antidebug;
+        $(ProjectDir)vcpkg_installed\x64-windows-static\include;
+        $(ProjectDir)src;
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(ProjectDir)lib\SecureEngineSDK64.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <!-- ========================================================= -->
+  <!-- Headers                                                   -->
+  <!-- ========================================================= -->
+  <ItemGroup>
+    <ClInclude Include="scanner.h" />
+    <ClInclude Include="src\antidebug\AntiDebug.h" />
+    <ClInclude Include="src\antidebug\SecureEngineCustomVMs.h" />
+    <ClInclude Include="src\antidebug\SecureEngineCustomVMs_VC_inline.h" />
+    <ClInclude Include="src\antidebug\ThemidaSDK.h" />
+    <ClInclude Include="src\Config.h" />
+    <ClInclude Include="src\firebase\Firebase.h" />
+    <ClInclude Include="src\firebase\FirebaseAuth.h" />
+    <ClInclude Include="src\firebase\FirebaseLogs.h" />
+    <ClInclude Include="src\injector\GetProcAddressR.h" />
+    <ClInclude Include="src\injector\LoadLibraryR.h" />
+    <ClInclude Include="src\injector\ReflectiveDLLInjection.h" />
+    <ClInclude Include="src\LoginFrame.h" />
+    <ClInclude Include="src\Memory.h" />
+    <ClInclude Include="src\ProcessUtils.h" />
+    <ClInclude Include="src\Scanner.h" />
+    <ClInclude Include="src\Theme.h" />
+    <ClInclude Include="src\ToolFrame.h" />
+    <ClInclude Include="src\updater\AppUpdater.h" />
+  </ItemGroup>
+  <!-- ========================================================= -->
+  <!-- Source files                                              -->
+  <!-- ========================================================= -->
+  <ItemGroup>
+    <ClCompile Include="src\antidebug\AntiDebug.cpp" />
+    <ClCompile Include="src\firebase\Firebase.cpp" />
+    <ClCompile Include="src\firebase\FirebaseAuth.cpp" />
+    <ClCompile Include="src\firebase\FirebaseLogs.cpp" />
+    <ClCompile Include="src\injector\GetProcAddressR.c" />
+    <ClCompile Include="src\injector\Inject.c" />
+    <ClCompile Include="src\injector\LoadLibraryR.c" />
+    <ClCompile Include="src\LoginFrame.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Memory.cpp" />
+    <ClCompile Include="src\ProcessUtils.cpp" />
+    <ClCompile Include="src\Scanner.cpp" />
+    <ClCompile Include="src\Theme.cpp" />
+    <ClCompile Include="src\ToolFrame.cpp" />
+    <ClCompile Include="src\updater\AppUpdater.cpp" />
+  </ItemGroup>
+  <!-- ========================================================= -->
+  <!-- Build targets                                             -->
+  <!-- ========================================================= -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

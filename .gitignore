@@ -1,0 +1,29 @@
+# Build output
+Release/
+Debug/
+x64/
+x86/
+
+# Intermediate files
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.idb
+*.ipdb
+*.iobj
+
+# VS project cruft
+.vs/
+*.user
+*.suo
+*.aps
+ipch/
+*.opensdf
+*.sdf
+*.db
+*.opendb
+
+# vcpkg
+**/vcpkg_installed/

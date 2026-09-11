@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="module/module.vcxproj" Id="f9842042-ca66-487d-9778-c1886b972eda" />
+  <Project Path="updater/Updater.vcxproj" Id="4abf5acf-6eb5-4b26-9964-ca2343ba5c25" />
+  <Project Path="wxlogin/Client.vcxproj" Id="0d6ad0e3-ac06-5085-16eb-e61c5e339cba" />
+</Solution>
