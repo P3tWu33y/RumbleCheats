@@ -11,7 +11,9 @@ namespace Config
 {
     constexpr const char* kFirebaseApiKey      = "AIzaSyAIv9Ui5FpDc9xlEsCBoBMtmu1iI7mHF40";
     constexpr const char* kFirebaseDatabaseUrl = "https://rumblefighter-39d77-default-rtdb.europe-west1.firebasedatabase.app";
-    constexpr const char* kAppVersion = "1.0.1";
+
+	// The version of the tool, used for update checks. Should match the GitHub release tag.
+    constexpr const char* kAppVersion = "1.0.0";
 
     // Small branding line shown on the Login and Tool windows.
     constexpr const char* kDiscordAd = ".petwussy - Discord";
@@ -21,7 +23,9 @@ namespace Config
     // Process the Tool window looks for.
     constexpr const wchar_t* kTargetProcessName = L"RumbleFighter.exe";
  
-    const std::string version = "v1.0.0-RF";
+
+	// Keep the module version with v prefix to match the GitHub release tag format.
+    const std::string version = "v1.0.0";
     const std::string assetName = "module.dll";
 
 }

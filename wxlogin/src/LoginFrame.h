@@ -15,7 +15,6 @@ public:
 
 private:
     void BuildUi();
-    void EnsureClientUpToDate();
     void AttemptLogin();
     void SetBusy(bool busy);
     void ShowError(const wxString& message);

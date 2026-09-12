@@ -4,7 +4,6 @@
 #include "Config.h"
 #include "ToolFrame.h"
 #include "ThemidaSDK.h"
-#include "AppUpdater.h"
 
 namespace
 {
@@ -36,15 +35,6 @@ LoginFrame::LoginFrame()
 {
     BuildUi();
     CentreOnScreen();
-
-    // Lock the form immediately -- the user shouldn't be able to attempt
-    // a login before we know the client itself is current. The actual
-    // check is deferred with CallAfter() so it runs once the event loop
-    // is pumping (the frame isn't shown/mapped yet inside the constructor).
-    SetBusy(true);
-    m_loginButton->SetLabel("Checking for updates...");
-
-    CallAfter(&LoginFrame::EnsureClientUpToDate);
 }
 
 void LoginFrame::BuildUi()
@@ -347,75 +337,6 @@ void LoginFrame::BuildUi()
     m_usernameCtrl->SetFocus();
 }
 
-void LoginFrame::EnsureClientUpToDate()
-{
-    // Gate the entire tool -- login included -- on the client's own
-    // version. This is deliberately a SEPARATE check/version from the
-    // module's GitHub release tag (Config::version/Config::assetName):
-    // reusing one version string for both would mean bumping one
-    // silently affects the other.
-
-    AppUpdater updater(Config::kFirebaseDatabaseUrl);
-
-    const AppUpdater::VersionInfo info = updater.CheckForUpdate();
-
-    if (!info.success)
-    {
-        // Fail safe: couldn't verify the client is current, so don't
-        // unlock login either. The user can close and retry.
-        ShowError(
-            info.error.empty()
-            ? wxString("Update check failed.")
-            : wxString::Format("Update check failed: %s", info.error)
-        );
-
-        m_loginButton->SetLabel("Login");
-
-        return;
-    }
-
-    const bool updateRequired =
-        info.forceUpdate ||
-        AppUpdater::IsNewerVersion(Config::kAppVersion, info.latestVersion);
-
-    if (!updateRequired)
-    {
-        SetBusy(false);
-        m_loginButton->SetLabel("Login");
-
-        return;
-    }
-
-    ShowError("A required update is available. Downloading...");
-
-    wchar_t tempPath[MAX_PATH]{};
-    GetTempPathW(MAX_PATH, tempPath);
-
-    std::wstring downloadedExePath = tempPath;
-    downloadedExePath += L"WxLoginUpdate.exe";
-
-    if (!updater.DownloadFile(info.downloadUrl, downloadedExePath))
-    {
-        ShowError("Update download failed. Please try again later.");
-        m_loginButton->SetLabel("Login");
-
-        return; // Update is required -- form stays locked either way.
-    }
-
-    wchar_t currentExePath[MAX_PATH]{};
-    GetModuleFileNameW(nullptr, currentExePath, MAX_PATH);
-
-    if (!updater.LaunchUpdaterAndExit(downloadedExePath, currentExePath))
-    {
-        ShowError("Could not launch the updater. Please reinstall the client.");
-        m_loginButton->SetLabel("Login");
-
-        return; // Update is still required -- form stays locked.
-    }
-
-    Close(true);
-}
-
 void LoginFrame::OnUsernameEnter(
     wxCommandEvent&)
 {
@@ -584,33 +505,33 @@ void LoginFrame::AttemptLogin()
 
     VM_START
 
-        bool blocked = false;
+    bool blocked = false;
     wxString blockMessage;
 
-    if (isDisabled)
-    {
-        blocked = true;
-        blockMessage = "Your account was disabled\nPlease contact us.";
-    }
-    else if (licenseResult.status == FirebaseLogs::LicenseStatus::Expired)
-    {
-        blocked = true;
-        blockMessage = "Your license has expired.\nPlease contact us to renew.";
-    }
+        if (isDisabled)
+        {
+            blocked = true;
+            blockMessage = "Your account was disabled\nPlease contact us.";
+        }
+        else if (licenseResult.status == FirebaseLogs::LicenseStatus::Expired)
+        {
+            blocked = true;
+            blockMessage = "Your license has expired.\nPlease contact us to renew.";
+        }
 
-    if (blocked)
-    {
-        m_auth->Logout();
+        if (blocked)
+        {
+            m_auth->Logout();
 
-        m_passwordCtrl->Clear();
+            m_passwordCtrl->Clear();
 
-        ShowError(blockMessage);
+            ShowError(blockMessage);
 
-        m_passwordCtrl->SetFocus();
+            m_passwordCtrl->SetFocus();
 
-        VM_END
+            VM_END
             return;
-    }
+        }
 
     if (licenseResult.status == FirebaseLogs::LicenseStatus::Error)
     {

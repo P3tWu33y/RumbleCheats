@@ -35,39 +35,93 @@ public:
             if (updateRequired)
             {
                 wchar_t tempPath[MAX_PATH]{};
-                GetTempPathW(MAX_PATH, tempPath);
+
+                if (GetTempPathW(MAX_PATH, tempPath) == 0)
+                {
+                    wxMessageBox(
+                        "Failed to get temporary directory.",
+                        "Update Failed",
+                        wxOK | wxICON_ERROR
+                    );
+
+                    return false;
+                }
 
                 const std::wstring downloadPath =
                     std::wstring(tempPath) + L"ClientUpdate.exe";
 
-                const bool downloaded =
-                    updater.DownloadFile(versionInfo.downloadUrl, downloadPath);
-
-                if (downloaded)
-                {
-                    wchar_t currentExePath[MAX_PATH]{};
-                    GetModuleFileNameW(nullptr, currentExePath, MAX_PATH);
-
-                    if (updater.LaunchUpdaterAndExit(downloadPath, currentExePath))
-                        return false; // Exit immediately -- Updater.exe takes over.
-
-                    wxLogDebug("LaunchUpdaterAndExit failed");
-                }
-                else
-                {
-                    wxLogDebug("DownloadFile failed");
-                }
-
-                // A forced update was required but couldn't be downloaded or
-                // launched -- refuse to run on the outdated version rather
-                // than silently letting the user in.
-                wxMessageBox(
-                    "A required update could not be installed.\n"
-                    "Please check your internet connection and try again.",
-                    "Update Failed",
-                    wxOK | wxICON_ERROR
+                wxLogDebug(
+                    "Update URL: %s",
+                    versionInfo.downloadUrl
                 );
 
+                wxLogDebug(
+                    "Update path: %ls",
+                    downloadPath.c_str()
+                );
+
+                const bool downloaded =
+                    updater.DownloadFile(
+                        versionInfo.downloadUrl,
+                        downloadPath
+                    );
+
+                if (!downloaded)
+                {
+                    wxLogDebug("DownloadFile FAILED");
+
+                    wxMessageBox(
+                        "The update could not be downloaded.",
+                        "Update Failed",
+                        wxOK | wxICON_ERROR
+                    );
+
+                    return false;
+                }
+
+                wxLogDebug("DownloadFile SUCCEEDED");
+
+                wchar_t currentExePath[MAX_PATH]{};
+
+                if (GetModuleFileNameW(
+                    nullptr,
+                    currentExePath,
+                    MAX_PATH) == 0)
+                {
+                    wxMessageBox(
+                        "Failed to determine the current executable path.",
+                        "Update Failed",
+                        wxOK | wxICON_ERROR
+                    );
+
+                    return false;
+                }
+
+                wxLogDebug(
+                    "Current EXE: %ls",
+                    currentExePath
+                );
+
+                const bool launched =
+                    updater.LaunchUpdaterAndExit(
+                        downloadPath,
+                        currentExePath
+                    );
+
+                if (!launched)
+                {
+                    wxLogDebug("LaunchUpdaterAndExit FAILED");
+
+                    wxMessageBox(
+                        "The update was downloaded, but the updater could not be launched.",
+                        "Update Failed",
+                        wxOK | wxICON_ERROR
+                    );
+
+                    return false;
+                }
+
+                // Updater was successfully launched.
                 return false;
             }
 
