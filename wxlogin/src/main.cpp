@@ -75,7 +75,7 @@ public:
         login->Show();
         SetTopWindow(login);
 
-        // Allocate a console for debugging output -- Don'ToolUpdatert forget to comment it out when you release the program, this is just for testing purposes
+        // Allocate a console for debugging output -- Don't forget to comment it out when you release the program, this is just for testing purposes
         //AllocConsole();
         //FILE* f;
         //freopen_s(&f, "CONOUT$", "w", stdout);

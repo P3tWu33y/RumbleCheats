@@ -15,6 +15,7 @@ public:
 
 private:
     void BuildUi();
+    void EnsureClientUpToDate();
     void AttemptLogin();
     void SetBusy(bool busy);
     void ShowError(const wxString& message);
@@ -22,6 +23,8 @@ private:
     void OnUsernameEnter(wxCommandEvent& event);
     void OnPasswordEnter(wxCommandEvent& event);
     void OnLoginClicked(wxCommandEvent& event);
+
+
 
     wxTextCtrl* m_usernameCtrl = nullptr;
     wxTextCtrl* m_passwordCtrl = nullptr;

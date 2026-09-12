@@ -110,13 +110,10 @@ void ToolFrame::OnPollTimer(wxTimerEvent& event)
 
 void ToolFrame::OnProcessFound(DWORD pid)
 {
-	// TODO: place your logic here once RumbleFighter.exe has been detected.
+	// RumbleFighter.exe has been detected.
 
 
-	const std::string version = "v1.0.0-RF";
-	const std::string assetName = "module.dll";
-
-	const std::string downloadUrl = "https://github.com/P3tWu33y/WxLogin-Releases/releases/download/" + version + "/" + assetName;
+	const std::string downloadUrl = "https://github.com/P3tWu33y/WxLogin-Releases/releases/download/" + Config::version + "/" + Config::assetName;
 
 	AppUpdater updater(Config::kFirebaseDatabaseUrl);
 

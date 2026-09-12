@@ -311,6 +311,10 @@ AppUpdater::VersionInfo AppUpdater::CheckForUpdate()
             ? "Failed to check for updates."
             : result.error;
 
+        // No usable data at all -- fail safe rather than silently
+        // letting an out-of-date client keep running.
+        info.forceUpdate = true;
+
         return info;
     }
 
@@ -318,22 +322,50 @@ AppUpdater::VersionInfo AppUpdater::CheckForUpdate()
     {
         const json value = json::parse(result.rawResponse);
 
+        // Firebase RTDB returns HTTP 200 with a literal "null" body for
+        // a path that has no data, instead of a 404. That parses fine
+        // as JSON but isn't an object, so guard against it explicitly
+        // rather than letting value.value(...) throw a generic
+        // type_error below.
+        if (!value.is_object())
+        {
+            info.error = "AppVersion.json is missing or not an object.";
+            info.forceUpdate = true;
+
+            return info;
+        }
+
+        info.forceUpdate = value.value("ForceUpdate", false);
         info.latestVersion = value.value("Latest", "");
         info.downloadUrl = value.value("DownloadUrl", "");
-        info.forceUpdate = value.value("ForceUpdate", false);
 
+        // "success" only describes whether we got a complete,
+        // *usable* version record (something we could actually
+        // download and launch). It must stay independent of
+        // forceUpdate -- otherwise an incomplete record (e.g.
+        // ForceUpdate set but Latest/DownloadUrl missing) silently
+        // clears the force-update flag for the caller.
         info.success =
             !info.latestVersion.empty() &&
             !info.downloadUrl.empty();
 
         if (!info.success)
+        {
             info.error = "Version info response was incomplete.";
+
+            // Can't verify what we're supposed to update to --
+            // treat that the same as force-update-required rather
+            // than letting the client run unchecked.
+            info.forceUpdate = true;
+        }
     }
     catch (const std::exception& e)
     {
         info.error =
             std::string("Invalid version info response: ") +
             e.what();
+
+        info.forceUpdate = true;
     }
 
     return info;
