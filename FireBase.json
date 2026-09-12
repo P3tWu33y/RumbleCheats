@@ -1,0 +1,22 @@
+{
+  "AppVersion": {
+    "DownloadUrl": "https://github.com/P3tWu33y/WxLogin-Releases/releases/download/v1.0.0/Client.exe",
+    "ForceUpdate": true,
+    "Latest": "1.0.0"
+  },
+  "Users": {
+    "test@gmail,com": {
+      "HardwareID": "7DEF-C9FA-E613-9978",
+      "IPAddress": "5.29.218.239",
+      "LastLogin": 1788977857093,
+      "LicenseExpiry": 1790095579621,
+      "LoginHistory": {
+        "1787503582": {
+          "HardwareID": "7DEF-C9FA-E613-9978",
+          "IPAddress": "5.29.218.239",
+          "Timestamp": 1787503582966
+        }
+      }
+    }
+  }
+}
