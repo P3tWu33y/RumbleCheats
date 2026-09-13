@@ -74,9 +74,9 @@ static DWORD WINAPI MainThread(LPVOID lpParam)
 
     GameGuard();
 
-    //AllocConsole();
-    //freopen("CONOUT$", "w", stdout);
-    //std::cout << "HelloWorld!" << std::endl;
+    AllocConsole();
+    freopen("CONOUT$", "w", stdout);
+    std::cout << "HelloWorld!" << std::endl;
 
    
  //   const char* LobbyIndex_Pattern = "8B 0D ?? ?? ?? 00 8B 15 ?? ?? ?? 00 8B 0C 8A E8 ?? ?? ?? FF 68 ?? ?? ?? 00 8D 8D 44 FC FF FF E8 ?? ?? ?? 00";

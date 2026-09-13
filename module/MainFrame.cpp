@@ -105,7 +105,7 @@ MainFrame::MainFrame()
     // ---------------------------------------------------------
 
     wxStaticText* feature2Label =
-        new wxStaticText(panel, wxID_ANY, "Feature2");
+        new wxStaticText(panel, wxID_ANY, "ChestHack x4");
 
     feature2Label->SetForegroundColour(*wxWHITE);
 
@@ -190,7 +190,7 @@ void MainFrame::Feature1(bool enabled)
 
 
 
-        //memapi::write(KillAll, "EB"); // This will make massive amount of hits. -- Disabled for public release.
+        memapi::write(KillAll, "EB"); // This will make massive amount of hits. -- Disabled for public release.
 
 
         WriteJmp(KillAll + 0x61, Hit);
@@ -215,6 +215,8 @@ void MainFrame::Feature1(bool enabled)
 
         //wxLogMessage("Feature1 disabled");
 
+        memapi::write(KillAll, "75"); // This will make massive amount of hits. -- Disabled for public release.
+
         WriteJe(KillAll + 0x61, Hit+0x1C);
         WriteJe(KillAll + 0x73, Hit+0x2E);
 
@@ -232,6 +234,18 @@ void MainFrame::Feature1(bool enabled)
 // Feature 2 actual logic
 // =============================================================
 
+uintptr_t returnAddress = 0;
+
+__declspec(naked) void SetESI5()
+{
+    __asm
+    {
+        mov esi, 0x4
+        test esi, esi
+        jmp returnAddress
+    }
+}
+
 void MainFrame::Feature2(bool enabled)
 {
     if (enabled)
@@ -242,7 +256,14 @@ void MainFrame::Feature2(bool enabled)
         // Put the actual Feature 2 logic here.
         // -----------------------------------------------------
 
-        wxLogMessage("Feature2 enabled");
+        //wxLogMessage("Feature2 enabled");
+
+        //memapi::write(ChestHack, "8B 75 A4 85 F6");
+
+        uintptr_t OriginalChestHack = ChestHack;
+		returnAddress = ChestHack += 0x5;
+
+        WriteJmp(OriginalChestHack, (uintptr_t)&SetESI5);
 
         // Example:
         //
@@ -258,10 +279,12 @@ void MainFrame::Feature2(bool enabled)
         // Put the cleanup / disable logic here.
         // -----------------------------------------------------
 
-        wxLogMessage("Feature2 disabled");
+        //wxLogMessage("Feature2 disabled");
+        memapi::write(ChestHack, "8B 75 A4 85 F6");
 
         // Example:
         //
         // DisableFeature2();
     }
 }
+

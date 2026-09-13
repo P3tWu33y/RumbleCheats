@@ -13,6 +13,7 @@ uintptr_t MonstersKO = 0;
 uintptr_t BossKO = 0;
 uintptr_t KillMonsterFunc = 0;
 uintptr_t KillBossFunc = 0;
+uintptr_t ChestHack = 0;
 
 void resolveAddresses()
 {
@@ -34,8 +35,10 @@ void resolveAddresses()
     
     const char* KillBossFunc_Pattern = "01 00 00 8B C8 0F B6 51 04";
     KillBossFunc = scanner::find_pattern(dw_start, dw_end, KillBossFunc_Pattern, 1) + 3; // We add 3 to point to the start of the function after the instruction prefix.
-    
 
+    const char* ChestHack_Pattern = "8B 75 A4 85 F6";
+    ChestHack = scanner::find_pattern(dw_start, dw_end, ChestHack_Pattern, 1);
+    
     if (KillAll == 0 || KillAll == dw_start)
     {
         MessageBoxA(
@@ -108,6 +111,17 @@ void resolveAddresses()
         return;
     }
 
+    if (ChestHack == 0 || ChestHack == dw_start)
+    {
+        MessageBoxA(
+            nullptr,
+            "[-]Resolver has failed, please contact P3tWu33y.",
+            "Resolver Error",
+            MB_OK | MB_ICONERROR
+        );
+
+        return;
+    }
 
 	// Debug output to console -- Comment it when you are done testing.
 	std::cout << "[+]BossKO: 0x" << std::hex << BossKO << std::endl;
@@ -116,6 +130,7 @@ void resolveAddresses()
     std::cout << "[+]KillAll: 0x" << std::hex << KillAll << std::endl;
 	std::cout << "[+]KillMonsterFunc Function: 0x" << std::hex << KillMonsterFunc << std::endl;
     std::cout << "[+]KillBossFunc Function: 0x" << std::hex << KillBossFunc << std::endl;
+    std::cout << "[+]ChestHack Function: 0x" << std::hex << ChestHack << std::endl;
 }
 
 
