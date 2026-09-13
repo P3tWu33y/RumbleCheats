@@ -3,9 +3,14 @@
 #include <wx/wx.h>
 #include <wx/sysopt.h>
 #include "App.h"
-#include "memory/memory.h"
-#include "memory/scanner.h"
-#include "bypass\bypass.h"
+#include "memory.h"
+#include "scanner.h"
+#include "bypass.h"
+#include "resolver.h"
+
+
+#define dw_start  0x00400000
+#define dw_end    0x00FFFFFF
 
 // ---------------------------------------------------------------------------
 // Writes a temporary manifest and activates a Common Controls v6 context.
@@ -68,6 +73,23 @@ static DWORD WINAPI MainThread(LPVOID lpParam)
     Sleep(2500);
 
     GameGuard();
+
+    //AllocConsole();
+    //freopen("CONOUT$", "w", stdout);
+    //std::cout << "HelloWorld!" << std::endl;
+
+   
+ //   const char* LobbyIndex_Pattern = "8B 0D ?? ?? ?? 00 8B 15 ?? ?? ?? 00 8B 0C 8A E8 ?? ?? ?? FF 68 ?? ?? ?? 00 8D 8D 44 FC FF FF E8 ?? ?? ?? 00";
+	//uintptr_t lobby_Address = scanner::find_pattern(dw_start, dw_end, LobbyIndex_Pattern, 1);
+
+ //   if (lobby_Address != 0 || lobby_Address != dw_start) {
+ //       std::cout << "Pattern found at address: 0x" << std::hex << lobby_Address << std::endl;
+ //   }
+
+
+	//We resolve all the addresses using pattern scanning, this is done to avoid hardcoding addresses that may change with updates.
+    resolveAddresses();
+
 
     HANDLE hActCtx = ActivateCommCtrl6();
 

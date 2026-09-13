@@ -28,6 +28,12 @@
     <Filter Include="reflective">
       <UniqueIdentifier>{4dc63fe6-6cb7-4690-a413-55322e8a637e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="firebase">
+      <UniqueIdentifier>{3ab797e2-f831-4ef2-a947-5429f49a1efd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\resolver">
+      <UniqueIdentifier>{d290b9b1-2a59-4135-87af-c7d40804c478}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,6 +62,12 @@
     </ClCompile>
     <ClCompile Include="reflective\ReflectiveLoader.c">
       <Filter>reflective</Filter>
+    </ClCompile>
+    <ClCompile Include="firebase\Firebase.cpp">
+      <Filter>firebase</Filter>
+    </ClCompile>
+    <ClCompile Include="resolver.cpp">
+      <Filter>Source Files\resolver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="MainFrame.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="firebase\Firebase.h">
+      <Filter>firebase</Filter>
+    </ClInclude>
+    <ClInclude Include="resolver.h">
+      <Filter>Source Files\resolver</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

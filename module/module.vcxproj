@@ -196,12 +196,15 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="bypass\bypass.cpp" />
+    <ClCompile Include="firebase\Firebase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainFrame.cpp" />
+    <ClInclude Include="firebase\Firebase.h" />
     <ClInclude Include="MainFrame.h" />
     <ClCompile Include="memory\memory.cpp" />
     <ClCompile Include="memory\scanner.cpp" />
     <ClCompile Include="reflective\ReflectiveLoader.c" />
+    <ClCompile Include="resolver.cpp" />
     <ClCompile Include="suspender\suspender.cpp" />
     <ClCompile Include="utilities\utils.cpp" />
   </ItemGroup>
@@ -212,6 +215,7 @@
     <ClInclude Include="memory\scanner.h" />
     <ClInclude Include="reflective\ReflectiveDLLInjection.h" />
     <ClInclude Include="reflective\ReflectiveLoader.h" />
+    <ClInclude Include="resolver.h" />
     <ClInclude Include="suspender\suspender.h" />
     <ClInclude Include="utilities\includes.h" />
     <ClInclude Include="utilities\utils.h" />

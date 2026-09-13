@@ -28,3 +28,9 @@ namespace memapi {
 
     int read_direct(uintptr_t addr);
 }
+
+
+// Helper functions
+void WriteJmp(uintptr_t source, uintptr_t destination);
+void WriteJe(uintptr_t source, uintptr_t destination);
+void WriteJng(uintptr_t source, uintptr_t destination);

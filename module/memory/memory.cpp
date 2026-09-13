@@ -97,3 +97,67 @@ int memapi::read_direct(uintptr_t addr)
 {
     return *reinterpret_cast<int*>(addr);
 }
+
+
+
+// Helper functions
+
+void WriteJe(uintptr_t source, uintptr_t destination)
+{
+    const int32_t relative =
+        static_cast<int32_t>(destination - (source + 6));
+
+    char buffer[32]{};
+
+    sprintf_s(
+        buffer,
+        sizeof(buffer),
+        "0F 84 %02X %02X %02X %02X",
+        static_cast<unsigned int>((relative >> 0) & 0xFF),
+        static_cast<unsigned int>((relative >> 8) & 0xFF),
+        static_cast<unsigned int>((relative >> 16) & 0xFF),
+        static_cast<unsigned int>((relative >> 24) & 0xFF)
+    );
+
+    memapi::write(source, buffer);
+}
+
+void WriteJng(uintptr_t source, uintptr_t destination)
+{
+    const int32_t relative =
+        static_cast<int32_t>(destination - (source + 6));
+
+    char buffer[32]{};
+
+    sprintf_s(
+        buffer,
+        sizeof(buffer),
+        "0F 8E %02X %02X %02X %02X",
+        static_cast<unsigned int>((relative >> 0) & 0xFF),
+        static_cast<unsigned int>((relative >> 8) & 0xFF),
+        static_cast<unsigned int>((relative >> 16) & 0xFF),
+        static_cast<unsigned int>((relative >> 24) & 0xFF)
+    );
+
+    memapi::write(source, buffer);
+}
+
+void WriteJmp(uintptr_t source, uintptr_t destination)
+{
+    const int32_t relative =
+        static_cast<int32_t>(destination - (source + 5));
+
+    char buffer[32]{};
+
+    sprintf_s(
+        buffer,
+        sizeof(buffer),
+        "E9 %02X %02X %02X %02X",
+        static_cast<unsigned int>((relative >> 0) & 0xFF),
+        static_cast<unsigned int>((relative >> 8) & 0xFF),
+        static_cast<unsigned int>((relative >> 16) & 0xFF),
+        static_cast<unsigned int>((relative >> 24) & 0xFF)
+    );
+
+    memapi::write(source, buffer);
+}

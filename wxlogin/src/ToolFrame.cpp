@@ -2,8 +2,9 @@
 
 #include "Theme.h"
 #include "Config.h"
-#include "Updater\AppUpdater.h"
-#include "Injector\LoadLibraryR.h"
+#include "AppUpdater.h"
+#include "LoadLibraryR.h"
+#include "LoginFrame.h"
 
 namespace
 {
@@ -158,9 +159,11 @@ void ToolFrame::OnProcessFound(DWORD pid)
 	//);
 
 
+
+
+	LPVOID lpRemoteParam = NULL;
 	HANDLE hProcess = NULL;
 	HANDLE hToken = NULL;
-	LPVOID lpRemoteParam = NULL;
 	SIZE_T dwLength = binary.size();
 	DWORD dwBytesRead = 0;
 	DWORD dwProcessId = pid;
@@ -189,7 +192,6 @@ void ToolFrame::OnProcessFound(DWORD pid)
 		m_statusLabel->SetLabel("[-]Failed to open target process");
 		return;
 	}
-
 
 	/* --- Inject reflectively from memory (bin) --- */
 	HANDLE hModule = LoadRemoteLibraryR(hProcess, (LPVOID)binary.data(), (SIZE_T)dwLength, lpRemoteParam);

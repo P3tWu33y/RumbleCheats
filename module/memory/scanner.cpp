@@ -23,9 +23,17 @@ uintptr_t scanner::find_pattern(uintptr_t dw_start, uintptr_t dw_end, const char
                 if (!pat[2])
                 {
                     if (results + 1 != result)
+                    {
                         results++;
+
+                        // Reset so we can search for the next occurrence.
+                        pat = pattern;
+                        match = 0;
+                    }
                     else
+                    {
                         return match;
+                    }
                 }
 
                 if (*(PWORD)pat == '\?\?' || *(PBYTE)pat != '\?')

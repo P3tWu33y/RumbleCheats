@@ -1,4 +1,5 @@
 #pragma once
+
 #include <wx/wx.h>
 #include <vector>
 
@@ -8,5 +9,13 @@ public:
     MainFrame();
 
 private:
+    void OnFeature1(wxCommandEvent& event);
+    void OnFeature2(wxCommandEvent& event);
+
+    void Feature1(bool enabled);
+    void Feature2(bool enabled);
+
     std::vector<wxCheckBox*> m_featureCheckBoxes;
+
+    wxDECLARE_EVENT_TABLE();
 };
