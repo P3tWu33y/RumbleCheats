@@ -101,7 +101,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;MODULE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN;WIN_X86</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;MODULE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN;WIN_X86;REFLECTIVEDLLINJECTION_VIA_LOADREMOTELIBRARYR;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -126,7 +126,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;MODULE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN;WIN_X86</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;MODULE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN;WIN_X86;REFLECTIVEDLLINJECTION_VIA_LOADREMOTELIBRARYR;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -149,7 +149,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;MODULE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN;WIN_X64</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;MODULE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN;WIN_X64;REFLECTIVEDLLINJECTION_VIA_LOADREMOTELIBRARYR;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -174,7 +174,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;MODULE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN;WIN_X64</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;MODULE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN;WIN_X64;REFLECTIVEDLLINJECTION_VIA_LOADREMOTELIBRARYR;REFLECTIVEDLLINJECTION_CUSTOM_DLLMAIN</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -216,6 +216,7 @@
     <ClInclude Include="reflective\ReflectiveDLLInjection.h" />
     <ClInclude Include="reflective\ReflectiveLoader.h" />
     <ClInclude Include="resolver.h" />
+    <ClInclude Include="SharedParams.h" />
     <ClInclude Include="suspender\suspender.h" />
     <ClInclude Include="utilities\includes.h" />
     <ClInclude Include="utilities\utils.h" />

@@ -120,7 +120,7 @@
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\antidebug;
+      <AdditionalIncludeDirectories>$(ProjectDir)src\suspender;$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\antidebug;
         $(ProjectDir)vcpkg_installed\x86-windows-static\include;
         $(ProjectDir)src;
         %(AdditionalIncludeDirectories)
@@ -157,7 +157,7 @@
       <WarningLevel>Level3</WarningLevel>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\updater;$(ProjectDir)src\injector;$(ProjectDir)src\firebase;$(ProjectDir)src\antidebug;$(ProjectDir)src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\suspender;$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\updater;$(ProjectDir)src\injector;$(ProjectDir)src\firebase;$(ProjectDir)src\antidebug;$(ProjectDir)src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -192,7 +192,7 @@
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\antidebug;
+      <AdditionalIncludeDirectories>$(ProjectDir)src\suspender;$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\antidebug;
         $(ProjectDir)vcpkg_installed\x64-windows-static\include;
         $(ProjectDir)src;
         %(AdditionalIncludeDirectories)
@@ -229,7 +229,7 @@
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\antidebug;
+      <AdditionalIncludeDirectories>$(ProjectDir)src\suspender;$(ProjectDir)src\updater;$(ProjectDir)src\antidebug;$(ProjectDir)src\firebase;$(ProjectDir)src\injector;$(ProjectDir)src\;$(ProjectDir)src\antidebug;
         $(ProjectDir)vcpkg_installed\x64-windows-static\include;
         $(ProjectDir)src;
         %(AdditionalIncludeDirectories)
@@ -268,6 +268,8 @@
     <ClInclude Include="src\Memory.h" />
     <ClInclude Include="src\ProcessUtils.h" />
     <ClInclude Include="src\Scanner.h" />
+    <ClInclude Include="src\SharedParams.h" />
+    <ClInclude Include="src\suspender\suspender.h" />
     <ClInclude Include="src\Theme.h" />
     <ClInclude Include="src\ToolFrame.h" />
     <ClInclude Include="src\updater\AppUpdater.h" />
@@ -288,6 +290,7 @@
     <ClCompile Include="src\Memory.cpp" />
     <ClCompile Include="src\ProcessUtils.cpp" />
     <ClCompile Include="src\Scanner.cpp" />
+    <ClCompile Include="src\suspender\suspender.cpp" />
     <ClCompile Include="src\Theme.cpp" />
     <ClCompile Include="src\ToolFrame.cpp" />
     <ClCompile Include="src\updater\AppUpdater.cpp" />

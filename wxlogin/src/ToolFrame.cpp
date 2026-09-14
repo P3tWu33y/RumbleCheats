@@ -5,10 +5,12 @@
 #include "AppUpdater.h"
 #include "LoadLibraryR.h"
 #include "LoginFrame.h"
+#include "SharedParams.h"
+#include "suspender.h"
 
 namespace
 {
-	constexpr int kPollIntervalMs = 500;
+	constexpr int kPollIntervalMs = 1;
 	constexpr int kMaxDots = 3;
 }
 
@@ -113,6 +115,8 @@ void ToolFrame::OnProcessFound(DWORD pid)
 {
 	// RumbleFighter.exe has been detected.
 
+	ThreadSuspender suspender;
+	suspender.SuspendResumeProcess("RumbleFighter.exe", true);
 
 	const std::string downloadUrl = "https://github.com/P3tWu33y/WxLogin-Releases/releases/download/" + Config::version + "/" + Config::assetName;
 
@@ -161,7 +165,7 @@ void ToolFrame::OnProcessFound(DWORD pid)
 
 
 
-	LPVOID lpRemoteParam = NULL;
+	//LPVOID lpRemoteParam = NULL;
 	HANDLE hProcess = NULL;
 	HANDLE hToken = NULL;
 	SIZE_T dwLength = binary.size();
@@ -193,14 +197,32 @@ void ToolFrame::OnProcessFound(DWORD pid)
 		return;
 	}
 
+
+	// --- Write parameters to target process memory --- */
+	SharedParams params = {};
+	std::string user = m_loggedInAsUser.ToStdString();
+
+	// Cut @gmail.com
+	auto at = user.find('@');
+	if (at != std::string::npos)
+		user = user.substr(0, at);
+
+	strncpy_s(params.username, user.c_str(), _TRUNCATE);
+
+	LPVOID pRemote = VirtualAllocEx(hProcess, NULL, sizeof(SharedParams),
+		MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+	WriteProcessMemory(hProcess, pRemote, &params, sizeof(SharedParams), NULL);
+
+
 	/* --- Inject reflectively from memory (bin) --- */
-	HANDLE hModule = LoadRemoteLibraryR(hProcess, (LPVOID)binary.data(), (SIZE_T)dwLength, lpRemoteParam);
+	HANDLE hModule = LoadRemoteLibraryR(hProcess, (LPVOID)binary.data(), (SIZE_T)dwLength, pRemote);
 
 	if (!hModule)
 	{
 		//wxLogDebug("LoadRemoteLibraryR failed");
 		m_statusLabel->SetLabel("[-]Error #1 failed");
 		//Beep(500, 500);
+		suspender.SuspendResumeProcess("RumbleFighter.exe", false);
 		return;
 	}
 	else
@@ -208,6 +230,8 @@ void ToolFrame::OnProcessFound(DWORD pid)
 		//wxLogDebug("LoadRemoteLibraryR returned: %p", hModule);
 		m_statusLabel->SetLabel("[+]Loaded Successfully!");
 	}
+
+	suspender.SuspendResumeProcess("RumbleFighter.exe", false);
 
 	Close(true);
 }

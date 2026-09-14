@@ -107,6 +107,9 @@
     <ClInclude Include="resolver.h">
       <Filter>Source Files\resolver</Filter>
     </ClInclude>
+    <ClInclude Include="SharedParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Module.rc">

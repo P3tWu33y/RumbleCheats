@@ -3,13 +3,14 @@
 
 wxIMPLEMENT_APP_NO_MAIN(App);
 
+
 bool App::OnInit()
 {
     OutputDebugStringA("[WX] App::OnInit entered.\n");
 
     OutputDebugStringA("[WX] Creating MainFrame.\n");
 
-    MainFrame* frame = new MainFrame();
+    MainFrame* frame = new MainFrame(g_username);
 
     OutputDebugStringA("[WX] MainFrame created.\n");
 

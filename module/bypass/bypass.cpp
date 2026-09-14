@@ -66,23 +66,23 @@ void GameGuard() {
     uintptr_t moduleBase = reinterpret_cast<uintptr_t>(GetModuleHandleA("RumbleFighter.exe"));
 
     // ---- Patch 1: main GameGuard check ------------------------------------
-    const char* pattern1 =
-        "0F 84 ?? ?? ?? ?? 3D 7C 01 00 00 0F 87 ?? ?? ?? ?? 74 ?? "
-        "8D 48 92 81 F9 FA 00 00 00 77 ?? 0F B6 89 ?? ?? ?? ?? "
-        "FF 24 8D ?? ?? ?? ?? BE ?? ?? ?? ?? EB";
+    //const char* pattern1 =
+    //    "0F 84 ?? ?? ?? ?? 3D 7C 01 00 00 0F 87 ?? ?? ?? ?? 74 ?? "
+    //    "8D 48 92 81 F9 FA 00 00 00 77 ?? 0F B6 89 ?? ?? ?? ?? "
+    //    "FF 24 8D ?? ?? ?? ?? BE ?? ?? ?? ?? EB";
 
-    uintptr_t addr1 = scanner::find_pattern(moduleBase, 0x00FFFFFF, pattern1);
-    if (addr1 == 0) {
-        std::cout << "Didn't find the pattern for bypass!\n";
-        return;
-    }
+    //uintptr_t addr1 = scanner::find_pattern(moduleBase, 0x00FFFFFF, pattern1);
+    //if (addr1 == 0) {
+    //    std::cout << "Didn't find the pattern for bypass!\n";
+    //    return;
+    //}
 
-    memapi::write(addr1, "E9 C2 00 00 00 90");   // jmp
-    std::cout << "Bypassed GameGuard Successfully!\n";
+    //memapi::write(addr1, "E9 C2 00 00 00 90");   // jmp
+    //std::cout << "Bypassed GameGuard Successfully!\n";
 
-    // NOP out the 10 bytes preceding the patch site
-    memapi::write(addr1 - 10, "90 90 90 90 90 90 90 90 90 90");
-    std::cout << std::hex << (addr1 - 10) << "\n";
+    //// NOP out the 10 bytes preceding the patch site
+    //memapi::write(addr1 - 10, "90 90 90 90 90 90 90 90 90 90");
+    //std::cout << std::hex << (addr1 - 10) << "\n";
 
     // ---- Patch 2: RF GameHack Detected bypass ------------------------------
     const char* pattern2 =

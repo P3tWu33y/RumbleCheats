@@ -28,6 +28,9 @@
     <Filter Include="Injector">
       <UniqueIdentifier>{f0ab5c7d-3a9c-45f3-8752-9a1f697ff4e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Suspender">
+      <UniqueIdentifier>{569c7aa5-3f7f-4718-8719-5467753ef3a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\LoginFrame.cpp">
@@ -74,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="src\injector\LoadLibraryR.c">
       <Filter>Injector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\suspender\suspender.cpp">
+      <Filter>Suspender</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="src\antidebug\SecureEngineCustomVMs_VC_inline.h">
       <Filter>Antidebug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SharedParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\suspender\suspender.h">
+      <Filter>Suspender</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

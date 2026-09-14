@@ -3,28 +3,27 @@
 #include "memory.h"
 #include "resolver.h"
 #include <wx/statline.h>
+#include "SharedParams.h"
 
 
 
 
-namespace
-{
-    wxString GetWelcomeText()
-    {
-        // Placeholder for now - will be set to the actual logged-in username later.
-        //const wxString username = "Username";
-        //return wxString::Format("Welcome %s", username);
-
-        return wxString("Wussy's Tool");
-    }
-}
+//namespace
+//{
+//    wxString GetWelcomeText(const wxString& username)
+//    {
+//        // Placeholder for now - will be set to the actual logged-in username later.
+//        return wxString::Format("Welcome %s", username);
+//
+//    }
+//}
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
 EVT_CHECKBOX(wxID_HIGHEST + 1, MainFrame::OnFeature1)
 EVT_CHECKBOX(wxID_HIGHEST + 2, MainFrame::OnFeature2)
 wxEND_EVENT_TABLE()
 
-MainFrame::MainFrame()
+MainFrame::MainFrame(const wxString& username)
     : wxFrame(nullptr, wxID_ANY, "Wussy's Tool",
         wxDefaultPosition, wxSize(420, 360))
 {
@@ -34,29 +33,51 @@ MainFrame::MainFrame()
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
 
     // Header
-    wxStaticText* welcomeText =
-        new wxStaticText(panel, wxID_ANY, GetWelcomeText());
-
-    wxFont headerFont = welcomeText->GetFont();
+    wxFont headerFont;
     headerFont.SetPointSize(16);
     headerFont.SetWeight(wxFONTWEIGHT_BOLD);
 
-    welcomeText->SetFont(headerFont);
-    welcomeText->SetForegroundColour(*wxWHITE);
+    wxBoxSizer* welcomeSizer = new wxBoxSizer(wxVERTICAL);
 
-    mainSizer->Add(
-        welcomeText,
+    wxStaticText* welcomeLabel =
+        new wxStaticText(panel, wxID_ANY, "Welcome");
+
+    welcomeLabel->SetFont(headerFont);
+    welcomeLabel->SetForegroundColour(*wxWHITE);
+
+    wxStaticText* usernameLabel =
+        new wxStaticText(panel, wxID_ANY, username);
+
+    usernameLabel->SetFont(headerFont);
+    usernameLabel->SetForegroundColour(wxColour(100, 180, 255));
+
+    welcomeSizer->Add(
+        welcomeLabel,
         0,
-        wxALIGN_CENTER | wxTOP | wxBOTTOM,
-        20
+        wxALIGN_CENTER | wxBOTTOM,
+        2
     );
 
+    welcomeSizer->Add(
+        usernameLabel,
+        0,
+        wxALIGN_CENTER
+    );
+
+    mainSizer->Add(
+        welcomeSizer,
+        0,
+        wxALIGN_CENTER | wxTOP | wxBOTTOM,
+        10
+    );
+
+    // Separator
     wxStaticLine* separator = new wxStaticLine(panel);
 
     mainSizer->Add(
         separator,
         0,
-        wxEXPAND | wxLEFT | wxRIGHT,
+        wxEXPAND | wxLEFT | wxRIGHT | wxTOP | wxBOTTOM,
         20
     );
 

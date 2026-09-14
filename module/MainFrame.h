@@ -6,7 +6,7 @@
 class MainFrame : public wxFrame
 {
 public:
-    MainFrame();
+    MainFrame(const wxString& username);
 
 private:
     void OnFeature1(wxCommandEvent& event);
