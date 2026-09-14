@@ -105,7 +105,7 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     resolveAddresses();
 
 
-    //HANDLE hActCtx = ActivateCommCtrl6();
+    HANDLE hActCtx = ActivateCommCtrl6();
 
     //// The game may have already loaded comctl32 v5 before injection.
     //// The activation context above redirects our control creation to v6,
@@ -118,8 +118,8 @@ DWORD WINAPI MainThread(LPVOID lpParam)
     HINSTANCE hHost = GetModuleHandleW(nullptr);
     wxEntry(hHost, nullptr, (wxCmdLineArgType)L"", SW_SHOW);
 
-    //if (hActCtx)
-    //    ReleaseActCtx(hActCtx);
+    if (hActCtx)
+        ReleaseActCtx(hActCtx);
 
     return 0;
 }
