@@ -264,7 +264,10 @@
     <ClInclude Include="src\injector\GetProcAddressR.h" />
     <ClInclude Include="src\injector\LoadLibraryR.h" />
     <ClInclude Include="src\injector\ReflectiveDLLInjection.h" />
+    <ClInclude Include="src\IPC.h" />
+    <ClInclude Include="src\IPCClient.h" />
     <ClInclude Include="src\LoginFrame.h" />
+    <ClInclude Include="src\MainFrame.h" />
     <ClInclude Include="src\Memory.h" />
     <ClInclude Include="src\ProcessUtils.h" />
     <ClInclude Include="src\Scanner.h" />
@@ -285,8 +288,10 @@
     <ClCompile Include="src\injector\GetProcAddressR.c" />
     <ClCompile Include="src\injector\Inject.c" />
     <ClCompile Include="src\injector\LoadLibraryR.c" />
+    <ClCompile Include="src\IPCClient.cpp" />
     <ClCompile Include="src\LoginFrame.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MainFrame.cpp" />
     <ClCompile Include="src\Memory.cpp" />
     <ClCompile Include="src\ProcessUtils.cpp" />
     <ClCompile Include="src\Scanner.cpp" />

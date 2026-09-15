@@ -1,26 +1,19 @@
 #include "MainFrame.h"
-#include "scanner.h"
-#include "memory.h"
-#include "resolver.h"
 #include <wx/statline.h>
+#include <thread>
 #include "SharedParams.h"
+#include "IPCClient.h"
+#include "IPC.h"
 
-
-
-
-//namespace
-//{
-//    wxString GetWelcomeText(const wxString& username)
-//    {
-//        // Placeholder for now - will be set to the actual logged-in username later.
-//        return wxString::Format("Welcome %s", username);
-//
-//    }
-//}
+void MainFrame::OnClose(wxCloseEvent&)
+{
+    wxTheApp->ExitMainLoop();
+}
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
 EVT_CHECKBOX(wxID_HIGHEST + 1, MainFrame::OnFeature1)
 EVT_CHECKBOX(wxID_HIGHEST + 2, MainFrame::OnFeature2)
+EVT_CLOSE(MainFrame::OnClose)
 wxEND_EVENT_TABLE()
 
 MainFrame::MainFrame(const wxString& username)
@@ -174,9 +167,12 @@ MainFrame::MainFrame(const wxString& username)
 
 void MainFrame::OnFeature1(wxCommandEvent& event)
 {
-    const bool enabled = event.IsChecked();
+    bool enabled = event.IsChecked();
 
-    Feature1(enabled);
+    std::thread([enabled]()
+        {
+            SetFeature(IPCCommand::Feature1, enabled);
+        }).detach();
 }
 
 
@@ -186,126 +182,10 @@ void MainFrame::OnFeature1(wxCommandEvent& event)
 
 void MainFrame::OnFeature2(wxCommandEvent& event)
 {
-    const bool enabled = event.IsChecked();
+    bool enabled = event.IsChecked();
 
-    Feature2(enabled);
+    std::thread([enabled]()
+        {
+            SetFeature(IPCCommand::Feature2, enabled);
+        }).detach();
 }
-
-
-// =============================================================
-// Feature 1 actual logic
-// =============================================================
-
-void MainFrame::Feature1(bool enabled)
-{
-    if (enabled)
-    {
-        // -----------------------------------------------------
-        // FEATURE 1 ENABLED
-        //
-        // Put the actual Feature 1 logic here.
-        // -----------------------------------------------------
-
-        //wxLogMessage("Feature1 enabled");
-
-
-
-
-        memapi::write(KillAll, "EB"); // This will make massive amount of hits. -- Disabled for public release.
-
-
-        WriteJmp(KillAll + 0x61, Hit);
-        WriteJmp(KillAll + 0x73, Hit);
-
-        WriteJmp(BossKO, KillBossFunc);
-        WriteJmp(MonstersKO, KillMonsterFunc);
-
-        // Example:
-        //
-        // DoSomething();
-        //
-        // EnableFeature1();
-    }
-    else
-    {
-        // -----------------------------------------------------
-        // FEATURE 1 DISABLED
-        //
-        // Put the cleanup / disable logic here.
-        // -----------------------------------------------------
-
-        //wxLogMessage("Feature1 disabled");
-
-        memapi::write(KillAll, "75"); // This will make massive amount of hits. -- Disabled for public release.
-
-        WriteJe(KillAll + 0x61, Hit+0x1C);
-        WriteJe(KillAll + 0x73, Hit+0x2E);
-
-        WriteJng(BossKO, KillBossFunc);
-        WriteJng(MonstersKO, KillMonsterFunc);
-
-        // Example:
-        //
-        // DisableFeature1();
-    }
-}
-
-
-// =============================================================
-// Feature 2 actual logic
-// =============================================================
-
-uintptr_t returnAddress = 0;
-
-__declspec(naked) void SetESI5()
-{
-    __asm
-    {
-        mov esi, 0x4
-        test esi, esi
-        jmp returnAddress
-    }
-}
-
-void MainFrame::Feature2(bool enabled)
-{
-    if (enabled)
-    {
-        // -----------------------------------------------------
-        // FEATURE 2 ENABLED
-        //
-        // Put the actual Feature 2 logic here.
-        // -----------------------------------------------------
-
-        //wxLogMessage("Feature2 enabled");
-
-        //memapi::write(ChestHack, "8B 75 A4 85 F6");
-
-        uintptr_t OriginalChestHack = ChestHack;
-		returnAddress = ChestHack += 0x5;
-
-        WriteJmp(OriginalChestHack, (uintptr_t)&SetESI5);
-
-        // Example:
-        //
-        // DoSomethingElse();
-        //
-        // EnableFeature2();
-    }
-    else
-    {
-        // -----------------------------------------------------
-        // FEATURE 2 DISABLED
-        //
-        // Put the cleanup / disable logic here.
-        // -----------------------------------------------------
-
-        //wxLogMessage("Feature2 disabled");
-        memapi::write(ChestHack, "8B 75 A4 85 F6");
-
-        // Example:
-        //
-        // DisableFeature2();
-    }
-}
-

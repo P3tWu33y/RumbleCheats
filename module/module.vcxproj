@@ -194,13 +194,13 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="App.cpp" />
     <ClCompile Include="bypass\bypass.cpp" />
     <ClCompile Include="firebase\Firebase.cpp" />
+    <ClCompile Include="IPCServer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainFrame.cpp" />
     <ClInclude Include="firebase\Firebase.h" />
-    <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="IPC.h" />
+    <ClInclude Include="IPCServer.h" />
     <ClCompile Include="memory\memory.cpp" />
     <ClCompile Include="memory\scanner.cpp" />
     <ClCompile Include="reflective\ReflectiveLoader.c" />
@@ -209,14 +209,12 @@
     <ClCompile Include="utilities\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.h" />
     <ClInclude Include="bypass\bypass.h" />
     <ClInclude Include="memory\memory.h" />
     <ClInclude Include="memory\scanner.h" />
     <ClInclude Include="reflective\ReflectiveDLLInjection.h" />
     <ClInclude Include="reflective\ReflectiveLoader.h" />
     <ClInclude Include="resolver.h" />
-    <ClInclude Include="SharedParams.h" />
     <ClInclude Include="suspender\suspender.h" />
     <ClInclude Include="utilities\includes.h" />
     <ClInclude Include="utilities\utils.h" />

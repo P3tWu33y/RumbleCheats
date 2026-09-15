@@ -39,12 +39,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainFrame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="suspender\suspender.cpp">
       <Filter>Source Files\suspender</Filter>
     </ClCompile>
@@ -69,11 +63,11 @@
     <ClCompile Include="resolver.cpp">
       <Filter>Source Files\resolver</Filter>
     </ClCompile>
+    <ClCompile Include="IPCServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="suspender\suspender.h">
       <Filter>Source Files\suspender</Filter>
     </ClInclude>
@@ -98,16 +92,16 @@
     <ClInclude Include="reflective\ReflectiveLoader.h">
       <Filter>reflective</Filter>
     </ClInclude>
-    <ClInclude Include="MainFrame.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="firebase\Firebase.h">
       <Filter>firebase</Filter>
     </ClInclude>
     <ClInclude Include="resolver.h">
       <Filter>Source Files\resolver</Filter>
     </ClInclude>
-    <ClInclude Include="SharedParams.h">
+    <ClInclude Include="IPCServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

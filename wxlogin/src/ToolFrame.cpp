@@ -7,6 +7,8 @@
 #include "LoginFrame.h"
 #include "SharedParams.h"
 #include "suspender.h"
+#include "MainFrame.h"
+#include "IPCClient.h"
 
 namespace
 {
@@ -232,6 +234,17 @@ void ToolFrame::OnProcessFound(DWORD pid)
 	}
 
 	suspender.SuspendResumeProcess("RumbleFighter.exe", false);
+
+	ConnectIPC();
+
+	if (!ConnectIPC())
+	{
+		// Module isn't running / pipe isn't available.
+		std::cout << "Failed to connect to IPC server." << std::endl;
+	}
+
+	MainFrame* frame = new MainFrame(m_loggedInAsUser);
+	frame->Show();
 
 	Close(true);
 }
